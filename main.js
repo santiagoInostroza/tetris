@@ -14,16 +14,18 @@ let isProduction = import.meta.env.MODE === 'production' ;
 
 console.log('import.meta.env.MODE', import.meta.env.MODE)
 
+let bgMusic, gameOverSound, removeOneLineSound, collisionSound;
+
 if (isProduction) {
-  const bgMusic = new Audio('https://raw.githubusercontent.com/santiagoinostroza/tetris/main/audios/bgMusic.mp3');
-  const gameOverSound = new Audio('https://raw.githubusercontent.com/santiagoinostroza/tetris/main/audios/gameOverSound.mp3');
-  const removeOneLineSound = new Audio('https://raw.githubusercontent.com/santiagoinostroza/tetris/main/audios/removeOneLineSound.mp3');
-  const collisionSound = new Audio('https://raw.githubusercontent.com/santiagoinostroza/tetris/main/audios/collisionSound.mp3');
+  bgMusic = new Audio('https://raw.githubusercontent.com/santiagoinostroza/tetris/main/audios/bgMusic.mp3');
+  gameOverSound = new Audio('https://raw.githubusercontent.com/santiagoinostroza/tetris/main/audios/gameOverSound.mp3');
+  removeOneLineSound = new Audio('https://raw.githubusercontent.com/santiagoinostroza/tetris/main/audios/removeOneLineSound.mp3');
+  collisionSound = new Audio('https://raw.githubusercontent.com/santiagoinostroza/tetris/main/audios/collisionSound.mp3');
 } else {
-  const bgMusic = new Audio('./audios/bgMusic.mp3')
-  const gameOverSound = new Audio('./audios/gameOverSound.mp3')
-  const removeOneLineSound = new Audio('./audios/removeOneLineSound.mp3')
-  const collisionSound = new Audio('./audios/collisionSound.mp3')
+  bgMusic = new Audio('./audios/bgMusic.mp3')
+  gameOverSound = new Audio('./audios/gameOverSound.mp3')
+  removeOneLineSound = new Audio('./audios/removeOneLineSound.mp3')
+  collisionSound = new Audio('./audios/collisionSound.mp3')
 }
   
 let score = 0
