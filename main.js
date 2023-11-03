@@ -9,15 +9,15 @@ const $time = document.getElementById('time')
 const $title = document.getElementById('title')
 const game = document.getElementById('game')
 
-// const audio = new Audio('./audios/db.mp3')
-// const audioGameOver = new Audio('./audios/audioGameOver.mp3')
-// const audioBomb = new Audio('./audios/bomba2.mp3')
-// const audioClick = new Audio('./audios/click.mp3')
+// const bgMusic = new Audio('./audios/db.mp3')
+// const gameOverSound = new Audio('./audios/audioGameOver.mp3')
+// const removeOneLineSound = new Audio('./audios/bomba2.mp3')
+// const collisionSound = new Audio('./audios/click.mp3')
 
-// const audio = new Audio('https://raw.githubusercontent.com/santiagoinostroza/tetris/main/audios/db.mp3');
-const audioGameOver = new Audio('https://raw.githubusercontent.com/santiagoinostroza/main/tetris/audios/audioGameOver.mp3');
-const audioBomb = new Audio('https://raw.githubusercontent.com/santiagoinostroza/main/tetris/audios/bomba2.mp3');
-const audioClick = new Audio('https://raw.githubusercontent.com/santiagoinostroza/main/tetris/audios/click.mp3');
+const bgMusic = new Audio('https://raw.githubusercontent.com/santiagoinostroza/tetris/main/audios/db.mp3');
+const gameOverSound = new Audio('https://raw.githubusercontent.com/santiagoinostroza/main/tetris/audios/audioGameOver.mp3');
+const removeOneLineSound = new Audio('https://raw.githubusercontent.com/santiagoinostroza/main/tetris/audios/bomba2.mp3');
+const collisionSound = new Audio('https://raw.githubusercontent.com/santiagoinostroza/main/tetris/audios/click.mp3');
 
 let score = 0
 
@@ -223,9 +223,8 @@ function solidifyPiece() {
 }
 
 function gameOver() {
-  audio.pause()
-  audio.currentTime = 0
-  audioGameOver.play()
+  bgMusic.pause()
+  gameOverSound.play()
   alert('Game Over')
   board.forEach(row => row.fill(0))
   score = 0
@@ -273,21 +272,22 @@ function removeLines() {
 }
 
 function startAudio() {
-  audio.loop = true
-  audio.volume = 0.1
-  audio.play()
+  bgMusic.loop = true
+  bgMusic.volume = 0.1
+  bgMusic.currentTime = 0
+  bgMusic.play()
 }
 
 function startAudioBomb() {
-  audioBomb.currentTime = 1
-  audioBomb.volume = 1
-  audioBomb.play()
+  removeOneLineSound.currentTime = 1
+  removeOneLineSound.volume = 1
+  removeOneLineSound.play()
 }
 
 function startAudioClick(){
-  audioClick.currentTime = 0.2
-  audioClick.volume = 1
-  audioClick.play()
+  collisionSound.currentTime = 0.2
+  collisionSound.volume = 1
+  collisionSound.play()
 }
 
 $title.addEventListener('click', () => {
