@@ -46,7 +46,6 @@ function update(time = 0) {
   lastTime = time
 
   dropCounter += deltaTime
-  console.log(dropCounter)
   if (dropCounter > 1000) {
     piece.position.y++
     if (checkCollision()) {
