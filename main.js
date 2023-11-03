@@ -13,11 +13,33 @@ const game = document.getElementById('game')
 // const gameOverSound = new Audio('./audios/audioGameOver.mp3')
 // const removeOneLineSound = new Audio('./audios/bomba2.mp3')
 // const collisionSound = new Audio('./audios/click.mp3')
-
-const bgMusic = new Audio('https://raw.githubusercontent.com/santiagoinostroza/tetris/main/audios/db.mp3');
-const gameOverSound = new Audio('https://raw.githubusercontent.com/santiagoinostroza/main/tetris/audios/audioGameOver.mp3');
-const removeOneLineSound = new Audio('https://raw.githubusercontent.com/santiagoinostroza/main/tetris/audios/bomba2.mp3');
-const collisionSound = new Audio('https://raw.githubusercontent.com/santiagoinostroza/main/tetris/audios/click.mp3');
+try {
+  const bgMusic = new Audio('https://raw.githubusercontent.com/santiagoinostroza/tetris/main/audios/db.mp3');
+} catch (error) {
+  console.log(error)
+  const bgMusic = new Audio('./audios/db.mp3');
+}
+try {
+  const gameOverSound = new Audio('https://raw.githubusercontent.com/santiagoinostroza/main/tetris/audios/audioGameOver.mp3');
+}
+catch (error) {
+  console.log(error)
+  const gameOverSound = new Audio('./audios/audioGameOver.mp3');
+}
+try {
+  const removeOneLineSound = new Audio('https://raw.githubusercontent.com/santiagoinostroza/main/tetris/audios/bomba2.mp3');
+}
+catch (error) {
+  console.log(error)
+  const removeOneLineSound = new Audio('./audios/bomba2.mp3');
+}
+try {
+  const collisionSound = new Audio('https://raw.githubusercontent.com/santiagoinostroza/main/tetris/audios/click.mp3');
+}
+catch (error) {
+  console.log(error)
+  const collisionSound = new Audio('./audios/click.mp3');
+}
 
 let score = 0
 
