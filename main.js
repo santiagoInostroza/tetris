@@ -9,10 +9,10 @@ const $time = document.getElementById('time')
 const $title = document.getElementById('title')
 const game = document.getElementById('game')
 
-const audio = new Audio('/audios/db.mp3')
-const audioGameOver = new Audio('/audios/audioGameOver.mp3')
-const audioBomb = new Audio('/audios/bomba2.mp3')
-const audioClick = new Audio('/audios/click.mp3')
+const audio = new Audio('./audios/db.mp3')
+const audioGameOver = new Audio('./audios/audioGameOver.mp3')
+const audioBomb = new Audio('./audios/bomba2.mp3')
+const audioClick = new Audio('./audios/click.mp3')
 
 // const audio = new Audio('https://raw.githubusercontent.com/santiagoInostroza/tetris/audios/db.mp3');
 // const audioGameOver = new Audio('https://raw.githubusercontent.com/santiagoInostroza/tetris/audios/audioGameOver.mp3');
