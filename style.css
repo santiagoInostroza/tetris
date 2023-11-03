@@ -1,0 +1,45 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: dark light;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0 400px 0 0;
+  display: grid;
+  place-content: center;
+  height: 100vh;
+
+  /* background-color: #242424; */
+}
+
+section {
+  display: grid;
+  place-content: center;
+  height: 100vh;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between
+}
+
+/* poner fondo de pantalla */
+body {
+  background-image: url("https://www.infobae.com/new-resizer/o-x20cYWl08rElKHum0oPYUosGw=/1200x900/filters:format(webp):quality(85)/cloudfront-us-east-1.images.arcpublishing.com/infobae/SXU7HVDRJNDLJLDC5D755OYVU4.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+} 
