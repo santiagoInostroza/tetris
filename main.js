@@ -9,15 +9,15 @@ const $time = document.getElementById('time')
 const $title = document.getElementById('title')
 const game = document.getElementById('game')
 
-const audio = new Audio('audios/db.mp3')
-const audioGameOver = new Audio('audios/audioGameOver.mp3')
-const audioBomb = new Audio('audios/bomba2.mp3')
-const audioClick = new Audio('audios/click.mp3')
+// const audio = new Audio('./audios/db.mp3')
+// const audioGameOver = new Audio('./audios/audioGameOver.mp3')
+// const audioBomb = new Audio('./audios/bomba2.mp3')
+// const audioClick = new Audio('./audios/click.mp3')
 
-// const audio = new Audio('https://raw.githubusercontent.com/santiagoInostroza/tetris/main/audios/db.mp3');
-// const audioGameOver = new Audio('https://raw.githubusercontent.com/santiagoInostroza/main/tetris/audios/audioGameOver.mp3');
-// const audioBomb = new Audio('https://raw.githubusercontent.com/santiagoInostroza/main/tetris/audios/bomba2.mp3');
-// const audioClick = new Audio('https://raw.githubusercontent.com/santiagoInostroza/main/tetris/audios/click.mp3');
+const audio = new Audio('https://raw.githubusercontent.com/santiagoinostroza/tetris/main/audios/db.mp3');
+const audioGameOver = new Audio('https://raw.githubusercontent.com/santiagoinostroza/main/tetris/audios/audioGameOver.mp3');
+const audioBomb = new Audio('https://raw.githubusercontent.com/santiagoinostroza/main/tetris/audios/bomba2.mp3');
+const audioClick = new Audio('https://raw.githubusercontent.com/santiagoinostroza/main/tetris/audios/click.mp3');
 
 let score = 0
 
