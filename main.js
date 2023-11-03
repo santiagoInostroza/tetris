@@ -15,9 +15,9 @@ const game = document.getElementById('game')
 // const collisionSound = new Audio('./audios/click.mp3')
 
 const bgMusic = new Audio('https://raw.githubusercontent.com/santiagoinostroza/tetris/main/audios/bgMusic.mp3');
-const gameOverSound = new Audio('https://raw.githubusercontent.com/santiagoinostroza/main/tetris/audios/gameOverSound.mp3');
-const removeOneLineSound = new Audio('https://raw.githubusercontent.com/santiagoinostroza/main/tetris/audios/removeOneLineSound.mp3');
-const collisionSound = new Audio('https://raw.githubusercontent.com/santiagoinostroza/main/tetris/audios/collisionSound.mp3');
+const gameOverSound = new Audio('https://raw.githubusercontent.com/santiagoinostroza/tetris/main/audios/gameOverSound.mp3');
+const removeOneLineSound = new Audio('https://raw.githubusercontent.com/santiagoinostroza/tetris/main/audios/removeOneLineSound.mp3');
+const collisionSound = new Audio('https://raw.githubusercontent.com/santiagoinostroza/tetris/main/audios/collisionSound.mp3');
 
 let score = 0
 
@@ -38,13 +38,15 @@ let lastTime = 0
 
 
 function update(time = 0) {
-  
-  // mostrar solo segundos
+
+  // mostrar segundos
   $time.innerText = Math.floor(time / 1000)
+
   const deltaTime = time - lastTime
   lastTime = time
 
   dropCounter += deltaTime
+  console.log(dropCounter)
   if (dropCounter > 1000) {
     piece.position.y++
     if (checkCollision()) {
