@@ -20,10 +20,10 @@ if (isProduction) {
   const removeOneLineSound = new Audio('https://raw.githubusercontent.com/santiagoinostroza/tetris/main/audios/removeOneLineSound.mp3');
   const collisionSound = new Audio('https://raw.githubusercontent.com/santiagoinostroza/tetris/main/audios/collisionSound.mp3');
 } else {
-  const bgMusic = new Audio('./audios/db.mp3')
-  const gameOverSound = new Audio('./audios/audioGameOver.mp3')
-  const removeOneLineSound = new Audio('./audios/bomba2.mp3')
-  const collisionSound = new Audio('./audios/click.mp3')
+  const bgMusic = new Audio('./audios/bgMusic.mp3')
+  const gameOverSound = new Audio('./audios/gameOverSound.mp3')
+  const removeOneLineSound = new Audio('./audios/removeOneLineSound.mp3')
+  const collisionSound = new Audio('./audios/collisionSound.mp3')
 }
   
 let score = 0
