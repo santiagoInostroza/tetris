@@ -171,14 +171,12 @@ $left.addEventListener('touchstart', () => {
     if (checkCollision()) {
       piece.position.x++;
     }
-    setTimeout(() => {
-      leftInterval = setInterval(() => {
-        piece.position.x--;
-        if (checkCollision()) {
-          piece.position.x++;
-        }
-      }, 100); // Ajusta el intervalo según tus necesidades
-    }, 100);
+    leftInterval = setInterval(() => {
+      piece.position.x--;
+      if (checkCollision()) {
+        piece.position.x++;
+      }
+    }, 100); // Ajusta el intervalo según tus necesidades
   }
 });
 
@@ -193,14 +191,12 @@ $right.addEventListener('touchstart', () => {
     if (checkCollision()) {
       piece.position.x--;
     }
-    setTimeout(() => {
-      rightInterval = setInterval(() => {
-        piece.position.x++;
-        if (checkCollision()) {
-          piece.position.x--;
-        }
-      }, 100);
-    }, 100);
+    rightInterval = setInterval(() => {
+      piece.position.x++;
+      if (checkCollision()) {
+        piece.position.x--;
+      }
+    }, 100); // Ajusta el intervalo según tus necesidades
   }
 });
 
@@ -217,18 +213,14 @@ $down.addEventListener('touchstart', () => {
       solidifyPiece();
       removeLines();
     }
-    
-    setTimeout(() => {
-      downInterval = setInterval(() => {
-        piece.position.y++;
-        if (checkCollision()) {
-          piece.position.y--;
-          solidifyPiece();
-          removeLines();
-        }
-      }, 100);
-    }, 100);
-
+    downInterval = setInterval(() => {
+      piece.position.y++;
+      if (checkCollision()) {
+        piece.position.y--;
+        solidifyPiece();
+        removeLines();
+      }
+    }, 100); // Ajusta el intervalo según tus necesidades
   }
 });
 
@@ -238,23 +230,8 @@ $down.addEventListener('touchend', () => {
 });
 
 $rotate.addEventListener('touchstart', () => {
-   if (!downInterval) {
-    rotate()
-    setTimeout(() => {
-      downInterval = setInterval(() => {
-        rotate()
-      }, 100);
-    }, 100);
-  }
+  rotate();
 });
-
-$rotate.addEventListener('touchend', () => {
-  clearInterval(downInterval);
-  downInterval = null;
-});
-
-
-
 
 function checkCollision() {
   return piece.matrix.find((row, y) => {
