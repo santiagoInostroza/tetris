@@ -159,37 +159,94 @@ document.addEventListener('keydown', event => {
 })
 
 
-const $left = document.getElementById('left')
-const $right = document.getElementById('right')
-const $down = document.getElementById('down')
-const $rotate = document.getElementById('rotate')
+// const $left = document.getElementById('left')
+// const $right = document.getElementById('right')
+// const $down = document.getElementById('down')
+// const $rotate = document.getElementById('rotate')
 
-$left.addEventListener('click', () => {
-  piece.position.x--
-  if (checkCollision()) {
-    piece.position.x++
-  }
-})
+// $left.addEventListener('click', () => {
+//   piece.position.x--
+//   if (checkCollision()) {
+//     piece.position.x++
+//   }
+// })
 
-$right.addEventListener('click', () => {
-  piece.position.x++
-  if (checkCollision()) {
-    piece.position.x--
-  }
-})
+// $right.addEventListener('click', () => {
+//   piece.position.x++
+//   if (checkCollision()) {
+//     piece.position.x--
+//   }
+// })
 
-$down.addEventListener('click', () => {
-  piece.position.y++
-  if (checkCollision()) {
-    piece.position.y--
-    solidifyPiece()
-    removeLines()
-  }
-})
+// $down.addEventListener('click', () => {
+//   piece.position.y++
+//   if (checkCollision()) {
+//     piece.position.y--
+//     solidifyPiece()
+//     removeLines()
+//   }
+// })
 
-$rotate.addEventListener('click', () => {
-  rotate()
-})
+// $rotate.addEventListener('click', () => {
+//   rotate()
+// })
+
+const $left = document.getElementById('left');
+const $right = document.getElementById('right');
+const $down = document.getElementById('down');
+const $rotate = document.getElementById('rotate');
+let leftInterval, rightInterval, downInterval;
+
+$left.addEventListener('touchstart', (event) => {
+  leftInterval = setInterval(() => {
+    piece.position.x--;
+    if (checkCollision()) {
+      piece.position.x++;
+    }
+  }, 100); // Ajusta el intervalo según tus necesidades
+  event.preventDefault();
+});
+
+$left.addEventListener('touchend', () => {
+  clearInterval(leftInterval);
+});
+
+$right.addEventListener('touchstart', (event) => {
+  rightInterval = setInterval(() => {
+    piece.position.x++;
+    if (checkCollision()) {
+      piece.position.x--;
+    }
+  }, 100); // Ajusta el intervalo según tus necesidades
+  event.preventDefault();
+});
+
+$right.addEventListener('touchend', () => {
+  clearInterval(rightInterval);
+});
+
+$down.addEventListener('touchstart', (event) => {
+  downInterval = setInterval(() => {
+    piece.position.y++;
+    if (checkCollision()) {
+      piece.position.y--;
+      solidifyPiece();
+      removeLines();
+    }
+  }, 100); // Ajusta el intervalo según tus necesidades
+  event.preventDefault();
+});
+
+$down.addEventListener('touchend', () => {
+  clearInterval(downInterval);
+});
+
+$rotate.addEventListener('touchstart', (event) => {
+  rotate();
+  event.preventDefault();
+});
+
+
 
 function checkCollision() {
   return piece.matrix.find((row, y) => {
