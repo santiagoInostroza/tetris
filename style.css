@@ -13,16 +13,12 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
-
 body {
   margin: 0;
   padding: 0;
-  display: grid;
-  place-content: center;
-
-  /* background-color: #242424; */
 }
 
+/* 
 
 .flex {
   display: flex;
@@ -30,8 +26,7 @@ body {
   justify-content: space-between
 }
 
-/* poner fondo de pantalla */
-body {
+.bg-db {
   background-image: url("https://www.infobae.com/new-resizer/o-x20cYWl08rElKHum0oPYUosGw=/1200x900/filters:format(webp):quality(85)/cloudfront-us-east-1.images.arcpublishing.com/infobae/SXU7HVDRJNDLJLDC5D755OYVU4.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -41,16 +36,6 @@ body {
 .container {
   height: 100vh;
   width: 400px;
-  /* border-left: 1px solid #fff;
-  border-right: 1px solid #fff; */
-}
-
-.centrado {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
 }
 
 .btn {
@@ -60,9 +45,7 @@ body {
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 10px;
   transition: all 0.3s ease-in-out;
-  width: 80px;
 }
 
 .btn:hover {
@@ -94,4 +77,209 @@ body {
   left: 0;
   right: 0;
   margin: auto;
+} */
+
+
+@keyframes moveText {
+  0% {
+      transform: translateX(100%);
+  }
+  100% {
+      transform: translateX(-100%);
+  }
 }
+
+@keyframes shine {
+0% {
+    opacity: 1;
+}
+50% {
+    opacity: 0.1;
+}
+100% {
+    opacity: 1;
+}
+}
+
+.shining {
+animation: shine 2s linear infinite;
+}
+
+.moving-text {
+animation: moveText 5s linear infinite;
+}
+
+.center {
+display: grid;
+place-items: center;
+}
+
+
+.flex-between{
+  display: flex;
+  justify-content: space-between;
+}
+
+.game_name{
+  font-size: 6.4rem;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff00de, 0 0 70px #ff00de, 0 0 80px #ff00de, 0 0 100px #ff00de, 0 0 150px #ff00de;
+  margin: 2.5rem 0;
+}
+
+/* MAIN MENU */
+
+#main_screen .btn {
+background-color: #242424;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+}
+
+#main_screen .btn:hover {
+  transform: scale(1.1);
+}
+
+#main_screen .btn:focus {
+outline: none;
+}
+
+#main_screen h2{
+font-size: 1.55rem;
+font-weight: 900;
+color: #979797;
+width: max-content;
+margin: 0.5rem auto;
+}
+
+#main_screen .buttons{
+display: flex;
+justify-content: space-around;
+gap: 0.5rem;
+margin-top: 2rem;
+flex-wrap: wrap;
+overflow-y: auto;
+overflow-x: hidden;
+height: 420px;
+}
+#main_screen .buttons .btn-theme{
+width: 360px;
+height: 200px;
+cursor: pointer;
+}
+#main_screen .buttons .btn-theme .img-theme{
+  width: 90%;
+  height: 90%;
+  object-fit: fill;
+  border-radius: 5%;
+}
+
+/* SCREEN MENU */
+
+
+#menu_screen{
+  height: 100vh;
+}
+
+#menu_screen .buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#menu_screen .btn {
+  width: 200px;
+  height: 50px;
+  margin: 10px;
+  border-radius: 10px;
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* GAME SCREEN */
+
+
+#game_screen .info{
+position: absolute;
+top: 10px;
+left: 10px;
+display: grid;
+}
+
+#game_screen .buttons{
+  position: absolute;
+  bottom: 10px;
+  left: 0px;
+  width: 100%;
+}
+
+#game_screen .buttons .btn-left{
+  width: 100px;
+  height: 300px;
+  background: none ;
+}
+
+#game_screen .buttons .btn-rotate{
+  width: 100px;
+  height: 300px;
+  background: none ;
+}
+
+#game_screen .buttons .btn-down{
+  width: 100%;
+  height: 100px;
+  background: none ;
+}
+
+#game_screen .buttons .btn-right{
+  width: 100px;
+  height: 300px;
+  background: none ;
+}
+
+
+
+/* Estilos para dispositivos móviles (ancho de pantalla <= 768px) */
+@media (max-width: 768px) {
+}
+
+/* Estilos para escritorio (ancho de pantalla > 768px) */
+@media (min-width: 769px) {
+
+  /* MAIN SCREEN */
+
+  #main_screen .buttons{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 6rem;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 300px;
+    gap: 4rem ;
+    }
+
+
+  /* SCREEN MENU */
+  
+  #menu_screen .buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  /* GAME SCREEN */
+  #game_screen .info{
+    /* bg trans */
+   background-color: rgba(0, 0, 0, 0.5);
+   padding: 1rem;
+  }
+
+
+}
+
+

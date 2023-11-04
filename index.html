@@ -7,39 +7,57 @@
     <title>Tetris</title>
   </head>
   <body>
-    <div id="app" class="container">
-      <section id="title" class="centrado">COMENZAR JUEGO</section>
-      <section id="game" class="centrado" style="display: none;">
-        <div class="menu">
-          <div class="flex">
-            <div>
-              <strong>
-                Puntaje: <span id="score"></span>
-              </strong>
-              <br>
-              <strong>
-                Tiempo: <span id="time"></span>
-              </strong>
-            </div>
-            <div id="prox-piece">
-              Prox Jug
-            </div>
+    <div id="app">
+      <!-- PANTALLA PRINCIPAL -->
+      <section id="main_screen" class="center" style="display: grid;">
+        <h1 class="shining game_name">TETRIS</h1>
+        <h2 class="">Selecciona Tu Tema Favorito</h2>
+        <article class="buttons">
+          <button id="btn_theme_1" class="btn btn-theme">
+            <img src="./img/logo_db.png" alt="logo Dragon Ball" class="img-theme" />
+          </button>
+          <button id="btn_theme_2" class="btn btn-theme">
+            <img src="./img/logo_sm.png" alt="logo Sailor Moon" class="img-theme" />
+          </button>
+        </article>
+        <article>Pronto más temas...</article>
+      </section>
 
+      <!--  PANTALLA MENU DE JUEGO-->
+      <section id="menu_screen" class="center " style="display: none;">
+        <h1 class="shining game_name">TETRIS</h1>
+        <article class="buttons">
+          <button id="btn_start" class="btn">JUGAR</button>
+          <button id="btn_scores" class="btn">PUNTAJES</button>
+        </article>
+      </section>
+
+      <!-- PANTALLA DE JUEGO -->
+      <section id="game_screen" class="center" style="display: none;">
+        <article class="menu">
+          <div class="info">
+            <strong> Puntaje: <span id="score"></span> </strong>
+            <strong> Tiempo: <span id="time"></span> </strong>
+            <strong> Posición: <span id="lines"></span> </strong>
+            <strong> Nivel: <span id="lines"></span>  </strong>
           </div>
-          
-        </div>
-        <div class="game-screen centrado">
+        </article>
+        <article class="game-screen">
           <canvas id="canvas"></canvas>
-        </div>
-        <div></div>
-        <div id="botonera" class="botonera">
-          <button id="left" class="btn btn-left">IZQ.</button>
-          <button id="rotate" class="btn btn-rotate">ROT.</button>
-          <button id="down" class="btn btn-down">BAJ</button>
-          <button id="right" class="btn btn-right">DER</button>
-        </div>
+        </article>
+        <article id="buttons_movil" class="buttons">
+          <div class="flex-between">
+            <button id="left" class="btn btn-left"></button>
+            <button id="rotate" class="btn btn-rotate"></button>
+            <button id="right" class="btn btn-right"></button>
+          </div>
+          <button id="down" class="btn btn-down"></button>
+        </article>
       </section>
     </div>
     <script type="module" src="/main.js"></script>
   </body>
 </html>
+
+<style>
+</style>
