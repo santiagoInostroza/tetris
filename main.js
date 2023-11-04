@@ -167,6 +167,10 @@ let leftInterval, rightInterval, downInterval;
 
 $left.addEventListener('touchstart', () => {
   if (!leftInterval) {
+    piece.position.x--;
+    if (checkCollision()) {
+      piece.position.x++;
+    }
     leftInterval = setInterval(() => {
       piece.position.x--;
       if (checkCollision()) {
@@ -183,6 +187,10 @@ $left.addEventListener('touchend', () => {
 
 $right.addEventListener('touchstart', () => {
   if (!rightInterval) {
+    piece.position.x++;
+    if (checkCollision()) {
+      piece.position.x--;
+    }
     rightInterval = setInterval(() => {
       piece.position.x++;
       if (checkCollision()) {
@@ -199,6 +207,12 @@ $right.addEventListener('touchend', () => {
 
 $down.addEventListener('touchstart', () => {
   if (!downInterval) {
+    piece.position.y++;
+    if (checkCollision()) {
+      piece.position.y--;
+      solidifyPiece();
+      removeLines();
+    }
     downInterval = setInterval(() => {
       piece.position.y++;
       if (checkCollision()) {
@@ -216,7 +230,17 @@ $down.addEventListener('touchend', () => {
 });
 
 $rotate.addEventListener('touchstart', () => {
-  rotate();
+   if (!downInterval) {
+    rotate()
+    downInterval = setInterval(() => {
+      rotate()
+    }, 100); // Ajusta el intervalo según tus necesidades
+  }
+});
+
+$rotate.addEventListener('touchend', () => {
+  clearInterval(downInterval);
+  downInterval = null;
 });
 
 
