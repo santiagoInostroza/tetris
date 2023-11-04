@@ -13,7 +13,6 @@ context.globalAlpha = 1;
 
 const $score = document.getElementById('score')
 const $time = document.getElementById('time')
-const $title = document.getElementById('title')
 const $buttons_movil = document.getElementById('buttons_movil')
 const $game_screen = document.getElementById('game_screen')
 
@@ -36,9 +35,9 @@ $btn_theme_1.addEventListener('click', () => {
   $main_screen.style.display = 'none'
   $menu_screen.style.display = 'grid'
   if(ISDESKTOP){
-    $body.style.backgroundImage = 'url(https://raw.githubusercontent.com/santiagoinostroza/tetris/main/img/db/bg.jpeg)'
+    $body.style.backgroundImage = 'url("https://raw.githubusercontent.com/santiagoinostroza/tetris/main/img/db/bg.jpeg")'
   }else{
-    $body.style.backgroundImage = 'url(https://raw.githubusercontent.com/santiagoinostroza/tetris/main/img/db/bg_movil.avif)'
+    $body.style.backgroundImage = "url('https://raw.githubusercontent.com/santiagoinostroza/tetris/main/img/db/bg_movil.avif')"
   }
   
   $body.style.backgroundSize = 'cover'
@@ -172,12 +171,14 @@ $left.addEventListener('touchstart', () => {
     if (checkCollision()) {
       piece.position.x++;
     }
-    leftInterval = setInterval(() => {
-      piece.position.x--;
-      if (checkCollision()) {
-        piece.position.x++;
-      }
-    }, 100); // Ajusta el intervalo según tus necesidades
+    setTimeout(() => {
+      leftInterval = setInterval(() => {
+        piece.position.x--;
+        if (checkCollision()) {
+          piece.position.x++;
+        }
+      }, 100); // Ajusta el intervalo según tus necesidades
+    }, 100);
   }
 });
 
@@ -192,12 +193,14 @@ $right.addEventListener('touchstart', () => {
     if (checkCollision()) {
       piece.position.x--;
     }
-    rightInterval = setInterval(() => {
-      piece.position.x++;
-      if (checkCollision()) {
-        piece.position.x--;
-      }
-    }, 100); // Ajusta el intervalo según tus necesidades
+    setTimeout(() => {
+      rightInterval = setInterval(() => {
+        piece.position.x++;
+        if (checkCollision()) {
+          piece.position.x--;
+        }
+      }, 100);
+    }, 100);
   }
 });
 
@@ -214,14 +217,18 @@ $down.addEventListener('touchstart', () => {
       solidifyPiece();
       removeLines();
     }
-    downInterval = setInterval(() => {
-      piece.position.y++;
-      if (checkCollision()) {
-        piece.position.y--;
-        solidifyPiece();
-        removeLines();
-      }
-    }, 100); // Ajusta el intervalo según tus necesidades
+    
+    setTimeout(() => {
+      downInterval = setInterval(() => {
+        piece.position.y++;
+        if (checkCollision()) {
+          piece.position.y--;
+          solidifyPiece();
+          removeLines();
+        }
+      }, 100);
+    }, 100);
+
   }
 });
 
@@ -233,9 +240,11 @@ $down.addEventListener('touchend', () => {
 $rotate.addEventListener('touchstart', () => {
    if (!downInterval) {
     rotate()
-    downInterval = setInterval(() => {
-      rotate()
-    }, 100); // Ajusta el intervalo según tus necesidades
+    setTimeout(() => {
+      downInterval = setInterval(() => {
+        rotate()
+      }, 100);
+    }, 100);
   }
 });
 
@@ -343,10 +352,3 @@ function startAudioClick(){
   SOUND.collisionSound.volume = 1
   SOUND.collisionSound.play()
 }
-
-// $title.addEventListener('click', () => {
-//   $title.style.display = 'none'
-//   game.style.display = 'grid'
-//   update()
-//   startAudio()
-// })
