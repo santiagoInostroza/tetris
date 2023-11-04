@@ -7,20 +7,38 @@
     <title>Tetris</title>
   </head>
   <body>
-    <div id="app">
-      <section id="title">COMENZAR JUEGO</section>
-      <div id="game" style="display: none;">
-        <canvas id="canvas"></canvas>
-        <br>
-        <div class="flex">
-          <strong>
-            Puntuación: <span id="score"></span>
-          </strong>
-          <strong>
-            Tiempo: <span id="time"></span>
-          </strong>
+    <div id="app" class="container">
+      <section id="title" class="centrado">COMENZAR JUEGO</section>
+      <section id="game" class="centrado" style="display: none;">
+        <div class="menu">
+          <div class="flex">
+            <div>
+              <strong>
+                Puntaje: <span id="score"></span>
+              </strong>
+              <br>
+              <strong>
+                Tiempo: <span id="time"></span>
+              </strong>
+            </div>
+            <div id="prox-piece">
+              Prox Jug
+            </div>
+
+          </div>
+          
         </div>
-      </div>
+        <div class="game-screen centrado">
+          <canvas id="canvas"></canvas>
+        </div>
+        <div></div>
+        <div id="botonera" class="botonera">
+          <button id="left" class="btn btn-left">IZQ.</button>
+          <button id="rotate" class="btn btn-rotate">ROT.</button>
+          <button id="down" class="btn btn-down">BAJ</button>
+          <button id="right" class="btn btn-right">DER</button>
+        </div>
+      </section>
     </div>
     <script type="module" src="/main.js"></script>
   </body>
