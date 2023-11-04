@@ -167,12 +167,16 @@ const $rotate = document.getElementById('rotate');
 let leftInterval, rightInterval, downInterval;
 
 $left.addEventListener('touchstart', (event) => {
+  piece.position.x--;
+  if (checkCollision()) {
+    piece.position.x++;
+  }
   leftInterval = setInterval(() => {
     piece.position.x--;
     if (checkCollision()) {
       piece.position.x++;
     }
-  }, 60); // Ajusta el intervalo según tus necesidades
+  }, 100); // Ajusta el intervalo según tus necesidades
   event.preventDefault();
 });
 
@@ -181,12 +185,16 @@ $left.addEventListener('touchend', () => {
 });
 
 $right.addEventListener('touchstart', (event) => {
+  piece.position.x++;
+  if (checkCollision()) {
+    piece.position.x--;
+  }
   rightInterval = setInterval(() => {
     piece.position.x++;
     if (checkCollision()) {
       piece.position.x--;
     }
-  }, 60); // Ajusta el intervalo según tus necesidades
+  }, 100); // Ajusta el intervalo según tus necesidades
   event.preventDefault();
 });
 
@@ -195,6 +203,12 @@ $right.addEventListener('touchend', () => {
 });
 
 $down.addEventListener('touchstart', (event) => {
+  piece.position.y++;
+  if (checkCollision()) {
+    piece.position.y--;
+    solidifyPiece();
+    removeLines();
+  }
   downInterval = setInterval(() => {
     piece.position.y++;
     if (checkCollision()) {
@@ -202,7 +216,7 @@ $down.addEventListener('touchstart', (event) => {
       solidifyPiece();
       removeLines();
     }
-  }, 60); // Ajusta el intervalo según tus necesidades
+  }, 100); // Ajusta el intervalo según tus necesidades
   event.preventDefault();
 });
 
@@ -211,9 +225,10 @@ $down.addEventListener('touchend', () => {
 });
 
 $rotate.addEventListener('touchstart', (event) => {
+  rotate();
   downInterval = setInterval(() => {
     rotate();
-  }, 120); // Ajusta el intervalo según tus necesidades
+  }, 100); // Ajusta el intervalo según tus necesidades
   event.preventDefault();
 });
 
