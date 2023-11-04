@@ -159,37 +159,6 @@ document.addEventListener('keydown', event => {
 })
 
 
-// const $left = document.getElementById('left')
-// const $right = document.getElementById('right')
-// const $down = document.getElementById('down')
-// const $rotate = document.getElementById('rotate')
-
-// $left.addEventListener('click', () => {
-//   piece.position.x--
-//   if (checkCollision()) {
-//     piece.position.x++
-//   }
-// })
-
-// $right.addEventListener('click', () => {
-//   piece.position.x++
-//   if (checkCollision()) {
-//     piece.position.x--
-//   }
-// })
-
-// $down.addEventListener('click', () => {
-//   piece.position.y++
-//   if (checkCollision()) {
-//     piece.position.y--
-//     solidifyPiece()
-//     removeLines()
-//   }
-// })
-
-// $rotate.addEventListener('click', () => {
-//   rotate()
-// })
 
 const $left = document.getElementById('left');
 const $right = document.getElementById('right');
@@ -203,7 +172,7 @@ $left.addEventListener('touchstart', (event) => {
     if (checkCollision()) {
       piece.position.x++;
     }
-  }, 100); // Ajusta el intervalo según tus necesidades
+  }, 60); // Ajusta el intervalo según tus necesidades
   event.preventDefault();
 });
 
@@ -217,7 +186,7 @@ $right.addEventListener('touchstart', (event) => {
     if (checkCollision()) {
       piece.position.x--;
     }
-  }, 100); // Ajusta el intervalo según tus necesidades
+  }, 60); // Ajusta el intervalo según tus necesidades
   event.preventDefault();
 });
 
@@ -233,7 +202,7 @@ $down.addEventListener('touchstart', (event) => {
       solidifyPiece();
       removeLines();
     }
-  }, 100); // Ajusta el intervalo según tus necesidades
+  }, 60); // Ajusta el intervalo según tus necesidades
   event.preventDefault();
 });
 
@@ -242,8 +211,14 @@ $down.addEventListener('touchend', () => {
 });
 
 $rotate.addEventListener('touchstart', (event) => {
-  rotate();
+  downInterval = setInterval(() => {
+    rotate();
+  }, 120); // Ajusta el intervalo según tus necesidades
   event.preventDefault();
+});
+
+$rotate.addEventListener('touchend', () => {
+  clearInterval(downInterval);
 });
 
 
