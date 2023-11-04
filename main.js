@@ -1,5 +1,12 @@
 import './style.css'
-import {BLOCK_SIZE, BOARD_WIDTH, BOARD_HEIGHT, EVENT_MOVEMENTS } from './consts'
+import {BLOCK_SIZE, BOARD_WIDTH, BOARD_HEIGHT, EVENT_MOVEMENTS, ISCELULAR, ISDESKTOP} from './consts'
+import { PIECES } from './pieces'
+import { SOUND } from './sounds'
+
+
+if (ISCELULAR) {
+  console.log('is celular')
+}
 
 // Inicializa canvas
 const canvas = document.getElementById('canvas')
@@ -7,27 +14,13 @@ const context = canvas.getContext('2d')
 const $score = document.getElementById('score')
 const $time = document.getElementById('time')
 const $title = document.getElementById('title')
+const $botonera = document.getElementById('botonera')
 const game = document.getElementById('game')
 
-// detectar si es produccion o desarrollo
-let isProduction = import.meta.env.MODE === 'production' ;
-
-console.log('import.meta.env.MODE', import.meta.env.MODE)
-
-let bgMusic, gameOverSound, removeOneLineSound, collisionSound;
-
-if (isProduction) {
-  bgMusic = new Audio('https://raw.githubusercontent.com/santiagoinostroza/tetris/main/audios/bgMusic.mp3');
-  gameOverSound = new Audio('https://raw.githubusercontent.com/santiagoinostroza/tetris/main/audios/gameOverSound.mp3');
-  removeOneLineSound = new Audio('https://raw.githubusercontent.com/santiagoinostroza/tetris/main/audios/removeOneLineSound.mp3');
-  collisionSound = new Audio('https://raw.githubusercontent.com/santiagoinostroza/tetris/main/audios/collisionSound.mp3');
-} else {
-  bgMusic = new Audio('./audios/bgMusic.mp3')
-  gameOverSound = new Audio('./audios/gameOverSound.mp3')
-  removeOneLineSound = new Audio('./audios/removeOneLineSound.mp3')
-  collisionSound = new Audio('./audios/collisionSound.mp3')
+if (ISDESKTOP) {
+  $botonera.style.display = 'none'
 }
-  
+
 let score = 0
 
 canvas.width = BLOCK_SIZE * BOARD_WIDTH
@@ -35,17 +28,13 @@ canvas.height = BLOCK_SIZE * BOARD_HEIGHT
 
 context.scale(BLOCK_SIZE, BLOCK_SIZE)
 
-// 2 game loop
-// function update() {
-//   draw()
-//   window.requestAnimationFrame(update)
-// }
 
 let dropCounter = 0
 let lastTime = 0
 
 
 
+// 2 game loop
 function update(time = 0) {
 
   // mostrar segundos
@@ -102,8 +91,6 @@ function draw() {
   $score.innerText = score 
 }
 
-
-
 // 3 create board
 const board = createBoard(BOARD_WIDTH, BOARD_HEIGHT)
 
@@ -115,71 +102,11 @@ function createBoard(width, height) {
 // 4 create piece
 const piece = {
   position: { x: 5, y: 5 },
-  matrix: [
-    [1, 1,],
-    [1, 1,],
-  ],
+  matrix: PIECES[Math.floor(Math.random() * PIECES.length)]
 }
 
-const pieces = [
-  [
-    [1, 1,],
-    [1, 1,],
-  ],
-  [
-    [0, 2, 0],
-    [2, 2, 2],
-    [0, 0, 0],
-  ],
-  [
-    [3, 3, 0],
-    [0, 3, 3],
-    [0, 0, 0],
-  ],
-  [
-    [0, 4, 4],
-    [4, 4, 0],
-    [0, 0, 0],
-  ],
-  [
-    [5, 5, 5, 5],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-  ],
-    [
-      [0, 6, 0],
-      [6, 6, 6],
-      [0, 6, 0],
-    ],
-    [
-      [7, 7, 7],
-      [7, 0, 0],
-      [0, 0, 0],
-    ],
-    [
-      [8, 0, 0],
-      [8, 0, 0,],
-      [8, 8, 8]
-    ],
-    [
-      [9, 9, 9],
-      [9, 0, 9],
-      [9, 0, 9]
-    ],
-    [
-      [0, 0, 10],
-      [10, 10, 10],
-      [0, 0, 10]
-    ],
-    [
-      [0, 0, 11],
-      [0, 11, 11],
-      [11, 11, 0]
-    ]
-]
 
-// 5 keyboard events
+// 5 keyboard events and touch events
 document.addEventListener('keydown', event => {
   if (event.key === EVENT_MOVEMENTS.LEFT) {
     piece.position.x--
@@ -203,6 +130,41 @@ document.addEventListener('keydown', event => {
   }
 })
 
+
+const $left = document.getElementById('left')
+const $right = document.getElementById('right')
+const $down = document.getElementById('down')
+const $rotate = document.getElementById('rotate')
+
+$left.addEventListener('click', () => {
+  piece.position.x--
+  if (checkCollision()) {
+    piece.position.x++
+  }
+})
+
+$right.addEventListener('click', () => {
+  piece.position.x++
+  if (checkCollision()) {
+    piece.position.x--
+  }
+})
+
+$down.addEventListener('click', () => {
+  piece.position.y++
+  if (checkCollision()) {
+    piece.position.y--
+    solidifyPiece()
+    removeLines()
+  }
+})
+
+$rotate.addEventListener('click', () => {
+  rotate()
+})
+
+
+
 function checkCollision() {
   return piece.matrix.find((row, y) => {
     return row.find((value, x) => {
@@ -221,7 +183,7 @@ function solidifyPiece() {
     })
   })
   // get random piece
-  piece.matrix = pieces[Math.floor(Math.random() * pieces.length)]
+  piece.matrix = PIECES[Math.floor(Math.random() * PIECES.length)]
   // reset piece
   piece.position.y = 0
   piece.position.x = Math.floor((BOARD_WIDTH - piece.matrix[0].length) / 2)
@@ -233,8 +195,8 @@ function solidifyPiece() {
 }
 
 function gameOver() {
-  bgMusic.pause()
-  gameOverSound.play()
+  SOUND.bgMusic.pause()
+  SOUND.gameOverSound.play()
   alert('Game Over')
   board.forEach(row => row.fill(0))
   score = 0
@@ -282,22 +244,22 @@ function removeLines() {
 }
 
 function startAudio() {
-  bgMusic.loop = true
-  bgMusic.volume = 0.1
-  bgMusic.currentTime = 0
-  bgMusic.play()
+  SOUND.bgMusic.loop = true
+  SOUND.bgMusic.volume = 0.1
+  SOUND.bgMusic.currentTime = 0
+  SOUND.bgMusic.play()
 }
 
 function startAudioBomb() {
-  removeOneLineSound.currentTime = 1
-  removeOneLineSound.volume = 1
-  removeOneLineSound.play()
+  SOUND.removeOneLineSound.currentTime = 1
+  SOUND.removeOneLineSound.volume = 1
+  SOUND.removeOneLineSound.play()
 }
 
 function startAudioClick(){
-  collisionSound.currentTime = 0.2
-  collisionSound.volume = 1
-  collisionSound.play()
+  SOUND.collisionSound.currentTime = 0.2
+  SOUND.collisionSound.volume = 1
+  SOUND.collisionSound.play()
 }
 
 $title.addEventListener('click', () => {
