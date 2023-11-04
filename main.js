@@ -158,37 +158,74 @@ document.addEventListener('keydown', event => {
 })
 
 
-const $left = document.getElementById('left')
-const $right = document.getElementById('right')
-const $down = document.getElementById('down')
-const $rotate = document.getElementById('rotate')
+// const $left = document.getElementById('left')
+// const $right = document.getElementById('right')
+// const $down = document.getElementById('down')
+// const $rotate = document.getElementById('rotate')
 
-$left.addEventListener('click', () => {
-  piece.position.x--
+// $left.addEventListener('click', () => {
+//   piece.position.x--
+//   if (checkCollision()) {
+//     piece.position.x++
+//   }
+// })
+
+// $right.addEventListener('click', () => {
+//   piece.position.x++
+//   if (checkCollision()) {
+//     piece.position.x--
+//   }
+// })
+
+// $down.addEventListener('click', () => {
+//   piece.position.y++
+//   if (checkCollision()) {
+//     piece.position.y--
+//     solidifyPiece()
+//     removeLines()
+//   }
+// })
+
+// $rotate.addEventListener('click', () => {
+//   rotate()
+// })
+
+const $left = document.getElementById('left');
+const $right = document.getElementById('right');
+const $down = document.getElementById('down');
+const $rotate = document.getElementById('rotate');
+
+$left.addEventListener('touchstart', (event) => {
+  piece.position.x--;
   if (checkCollision()) {
-    piece.position.x++
+    piece.position.x++;
   }
-})
+  event.preventDefault();
+});
 
-$right.addEventListener('click', () => {
-  piece.position.x++
+$right.addEventListener('touchstart', (event) => {
+  piece.position.x++;
   if (checkCollision()) {
-    piece.position.x--
+    piece.position.x--;
   }
-})
+  event.preventDefault();
+});
 
-$down.addEventListener('click', () => {
-  piece.position.y++
+$down.addEventListener('touchstart', (event) => {
+  piece.position.y++;
   if (checkCollision()) {
-    piece.position.y--
-    solidifyPiece()
-    removeLines()
+    piece.position.y--;
+    solidifyPiece();
+    removeLines();
   }
-})
+  event.preventDefault();
+});
 
-$rotate.addEventListener('click', () => {
-  rotate()
-})
+$rotate.addEventListener('touchstart', (event) => {
+  rotate();
+  event.preventDefault();
+});
+
 
 function checkCollision() {
   return piece.matrix.find((row, y) => {
