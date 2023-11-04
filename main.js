@@ -36,9 +36,9 @@ $btn_theme_1.addEventListener('click', () => {
   $main_screen.style.display = 'none'
   $menu_screen.style.display = 'grid'
   if(ISDESKTOP){
-    $body.style.backgroundImage = 'https://raw.githubusercontent.com/santiagoinostroza/tetris/main/img/db/bg.jpeg)'
+    $body.style.backgroundImage = 'url(https://raw.githubusercontent.com/santiagoinostroza/tetris/main/img/db/bg.jpeg)'
   }else{
-    $body.style.backgroundImage = 'https://raw.githubusercontent.com/santiagoinostroza/tetris/main/img/db/bg_movil.avif)'
+    $body.style.backgroundImage = 'url(https://raw.githubusercontent.com/santiagoinostroza/tetris/main/img/db/bg_movil.avif)'
   }
   
   $body.style.backgroundSize = 'cover'
