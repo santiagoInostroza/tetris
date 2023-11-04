@@ -1,24 +1,54 @@
 import './style.css'
-import {BLOCK_SIZE, BOARD_WIDTH, BOARD_HEIGHT, EVENT_MOVEMENTS, ISCELULAR, ISDESKTOP} from './consts'
+import {BLOCK_SIZE, BOARD_WIDTH, BOARD_HEIGHT, EVENT_MOVEMENTS, ISMOVIL, ISDESKTOP} from './consts'
 import { PIECES } from './pieces'
 import { SOUND } from './sounds'
 
 
-if (ISCELULAR) {
-  console.log('is celular')
-}
 
 // Inicializa canvas
 const canvas = document.getElementById('canvas')
+canvas.style.background = 'transparent'
 const context = canvas.getContext('2d')
+context.globalAlpha = 1;
+
 const $score = document.getElementById('score')
 const $time = document.getElementById('time')
 const $title = document.getElementById('title')
-const $botonera = document.getElementById('botonera')
-const game = document.getElementById('game')
+const $buttons_movil = document.getElementById('buttons_movil')
+const $game_screen = document.getElementById('game_screen')
 
+const $body = document.querySelector('body')
+const $main_screen = document.getElementById('main_screen')
+const $menu_screen = document.getElementById('menu_screen')
+const $btn_theme_1 = document.getElementById('btn_theme_1')
+const $btn_theme_2 = document.getElementById('btn_theme_2')
+const $btn_start = document.getElementById('btn_start')
+
+$btn_start.addEventListener('click', () => {
+  $menu_screen.style.display = 'none'
+  $game_screen.style.display = 'grid'
+  update()
+  startAudio()
+})
+
+$btn_theme_1.addEventListener('click', () => {
+  // se elige el tema 1
+  $main_screen.style.display = 'none'
+  $menu_screen.style.display = 'grid'
+  if(ISDESKTOP){
+    $body.style.backgroundImage = 'url(./img/db/bg.jpeg)'
+  }else{
+    $body.style.backgroundImage = 'url(./img/db/bg_movil.avif)'
+  }
+  $body.style.backgroundSize = 'cover'
+  $body.style.backgroundRepeat = 'no-repeat'
+  $body.style.backgroundPosition = 'center'
+})
+
+if (ISMOVIL) {
+}
 if (ISDESKTOP) {
-  $botonera.style.display = 'none'
+  $buttons_movil.style.display = 'none'
 }
 
 let score = 0
@@ -32,8 +62,6 @@ context.scale(BLOCK_SIZE, BLOCK_SIZE)
 let dropCounter = 0
 let lastTime = 0
 
-
-
 // 2 game loop
 function update(time = 0) {
 
@@ -42,9 +70,9 @@ function update(time = 0) {
 
   const deltaTime = time - lastTime
   lastTime = time
-
   dropCounter += deltaTime
-  if (dropCounter > 1000) {
+  
+  if (dropCounter > 2000) {
     piece.position.y++
     if (checkCollision()) {
       piece.position.y--
@@ -163,8 +191,6 @@ $rotate.addEventListener('click', () => {
   rotate()
 })
 
-
-
 function checkCollision() {
   return piece.matrix.find((row, y) => {
     return row.find((value, x) => {
@@ -200,8 +226,8 @@ function gameOver() {
   alert('Game Over')
   board.forEach(row => row.fill(0))
   score = 0
-  $title.style.display = 'grid'
-  game.style.display = 'none'
+  $menu_screen.style.display = 'grid'
+  $game_screen.style.display = 'none'
 }
 
 function rotate() {
@@ -262,9 +288,9 @@ function startAudioClick(){
   SOUND.collisionSound.play()
 }
 
-$title.addEventListener('click', () => {
-  $title.style.display = 'none'
-  game.style.display = 'grid'
-  update()
-  startAudio()
-})
+// $title.addEventListener('click', () => {
+//   $title.style.display = 'none'
+//   game.style.display = 'grid'
+//   update()
+//   startAudio()
+// })
