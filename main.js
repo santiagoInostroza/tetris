@@ -159,82 +159,66 @@ document.addEventListener('keydown', event => {
 })
 
 
-
 const $left = document.getElementById('left');
 const $right = document.getElementById('right');
 const $down = document.getElementById('down');
 const $rotate = document.getElementById('rotate');
 let leftInterval, rightInterval, downInterval;
 
-$left.addEventListener('touchstart', (event) => {
-  piece.position.x--;
-  if (checkCollision()) {
-    piece.position.x++;
+$left.addEventListener('touchstart', () => {
+  if (!leftInterval) {
+    leftInterval = setInterval(() => {
+      piece.position.x--;
+      if (checkCollision()) {
+        piece.position.x++;
+      }
+    }, 100); // Ajusta el intervalo según tus necesidades
   }
-  leftInterval = setInterval(() => {
-    piece.position.x--;
-    if (checkCollision()) {
-      piece.position.x++;
-    }
-  }, 100); // Ajusta el intervalo según tus necesidades
-  event.preventDefault();
 });
 
 $left.addEventListener('touchend', () => {
   clearInterval(leftInterval);
+  leftInterval = null;
 });
 
-$right.addEventListener('touchstart', (event) => {
-  piece.position.x++;
-  if (checkCollision()) {
-    piece.position.x--;
+$right.addEventListener('touchstart', () => {
+  if (!rightInterval) {
+    rightInterval = setInterval(() => {
+      piece.position.x++;
+      if (checkCollision()) {
+        piece.position.x--;
+      }
+    }, 100); // Ajusta el intervalo según tus necesidades
   }
-  rightInterval = setInterval(() => {
-    piece.position.x++;
-    if (checkCollision()) {
-      piece.position.x--;
-    }
-  }, 100); // Ajusta el intervalo según tus necesidades
-  event.preventDefault();
 });
 
 $right.addEventListener('touchend', () => {
   clearInterval(rightInterval);
+  rightInterval = null;
 });
 
-$down.addEventListener('touchstart', (event) => {
-  piece.position.y++;
-  if (checkCollision()) {
-    piece.position.y--;
-    solidifyPiece();
-    removeLines();
+$down.addEventListener('touchstart', () => {
+  if (!downInterval) {
+    downInterval = setInterval(() => {
+      piece.position.y++;
+      if (checkCollision()) {
+        piece.position.y--;
+        solidifyPiece();
+        removeLines();
+      }
+    }, 100); // Ajusta el intervalo según tus necesidades
   }
-  downInterval = setInterval(() => {
-    piece.position.y++;
-    if (checkCollision()) {
-      piece.position.y--;
-      solidifyPiece();
-      removeLines();
-    }
-  }, 100); // Ajusta el intervalo según tus necesidades
-  event.preventDefault();
 });
 
 $down.addEventListener('touchend', () => {
   clearInterval(downInterval);
+  downInterval = null;
 });
 
-$rotate.addEventListener('touchstart', (event) => {
+$rotate.addEventListener('touchstart', () => {
   rotate();
-  downInterval = setInterval(() => {
-    rotate();
-  }, 100); // Ajusta el intervalo según tus necesidades
-  event.preventDefault();
 });
 
-$rotate.addEventListener('touchend', () => {
-  clearInterval(downInterval);
-});
 
 
 
