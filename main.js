@@ -1,5 +1,5 @@
 import './style.css'
-import {BLOCK_SIZE, BOARD_WIDTH, BOARD_HEIGHT, EVENT_MOVEMENTS, ISMOVIL, ISDESKTOP} from './consts'
+import {BLOCK_SIZE, BOARD_WIDTH, BOARD_HEIGHT, EVENT_MOVEMENTS,ISPRODUCTION, ISMOVIL, ISDESKTOP} from './consts'
 import { PIECES } from './pieces'
 import { SOUND } from './sounds'
 
@@ -13,7 +13,6 @@ context.globalAlpha = 1;
 
 const $score = document.getElementById('score')
 const $time = document.getElementById('time')
-const $title = document.getElementById('title')
 const $buttons_movil = document.getElementById('buttons_movil')
 const $game_screen = document.getElementById('game_screen')
 
@@ -35,11 +34,22 @@ $btn_theme_1.addEventListener('click', () => {
   // se elige el tema 1
   $main_screen.style.display = 'none'
   $menu_screen.style.display = 'grid'
-  if(ISDESKTOP){
-    $body.style.backgroundImage = 'url(./img/db/bg.jpeg)'
-  }else{
-    $body.style.backgroundImage = 'url(./img/db/bg_movil.avif)'
+  
+
+  if (ISPRODUCTION) {
+    if(ISDESKTOP){
+      $body.style.backgroundImage = 'https://raw.githubusercontent.com/santiagoinostroza/tetris/main/img/db/bg.jpeg)'
+    }else{
+      $body.style.backgroundImage = 'url(https://raw.githubusercontent.com/santiagoinostroza/tetris/main/img/db/bg_movil.avif)'
+    }
+  } else {
+    if(ISDESKTOP){
+      $body.style.backgroundImage = 'url(./img/db/bg.avif)'
+    }else{
+      $body.style.backgroundImage = 'url(./img/db/bg_movil.avif)'
+    }
   }
+
   $body.style.backgroundSize = 'cover'
   $body.style.backgroundRepeat = 'no-repeat'
   $body.style.backgroundPosition = 'center'
@@ -287,10 +297,3 @@ function startAudioClick(){
   SOUND.collisionSound.volume = 1
   SOUND.collisionSound.play()
 }
-
-// $title.addEventListener('click', () => {
-//   $title.style.display = 'none'
-//   game.style.display = 'grid'
-//   update()
-//   startAudio()
-// })
