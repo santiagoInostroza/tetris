@@ -1,15 +1,13 @@
 import './style.css'
 import {BLOCK_SIZE, BOARD_WIDTH, BOARD_HEIGHT, EVENT_MOVEMENTS, ISMOVIL, ISDESKTOP} from './consts'
 import { PIECES } from './pieces'
-import { SOUND } from './sounds'
-
+import { selectTheme, startIntroAudio, stopIntroAudio, startGameAudio, stopGameAudio, startGameOverAudio , startRemoveOneLineSound, startCollisionSound} from './sounds'
+import { getBgImg } from './images'
 
 
 // Inicializa canvas
 const canvas = document.getElementById('canvas')
-canvas.style.background = 'transparent'
 const context = canvas.getContext('2d')
-context.globalAlpha = 1;
 
 const $score = document.getElementById('score')
 const $time = document.getElementById('time')
@@ -19,31 +17,44 @@ const $game_screen = document.getElementById('game_screen')
 const $body = document.querySelector('body')
 const $main_screen = document.getElementById('main_screen')
 const $menu_screen = document.getElementById('menu_screen')
-const $btn_theme_1 = document.getElementById('btn_theme_1')
-const $btn_theme_2 = document.getElementById('btn_theme_2')
+
 const $btn_start = document.getElementById('btn_start')
 
+
+
+const $btns_theme = document.querySelectorAll('.btn-theme')
+
+// LISTENERS DE LOS BOTONES DE TEMA
+$btns_theme.forEach(btn => {
+
+  btn.addEventListener('click', () => {
+    let theme = btn.dataset.theme
+    selectTheme(theme)
+    startIntroAudio()
+
+    $main_screen.style.display = 'none'
+    $menu_screen.style.display = 'grid'
+
+   
+    let img = getBgImg(theme)
+    $body.style.backgroundImage = img
+   
+    
+    $body.style.backgroundSize = 'cover'
+    $body.style.backgroundRepeat = 'no-repeat'
+    $body.style.backgroundPosition = 'center'
+  })
+})
+
+// LISTENER DEL BOTON START
 $btn_start.addEventListener('click', () => {
   $menu_screen.style.display = 'none'
   $game_screen.style.display = 'grid'
   update()
-  startAudio()
+  stopIntroAudio()
+  startGameAudio()
 })
 
-$btn_theme_1.addEventListener('click', () => {
-  // se elige el tema 1
-  $main_screen.style.display = 'none'
-  $menu_screen.style.display = 'grid'
-  if(ISDESKTOP){
-    $body.style.backgroundImage = 'url("https://raw.githubusercontent.com/santiagoinostroza/tetris/main/img/db/bg.jpeg")'
-  }else{
-    $body.style.backgroundImage = "url('https://raw.githubusercontent.com/santiagoinostroza/tetris/main/img/db/bg_movil.avif')"
-  }
-  
-  $body.style.backgroundSize = 'cover'
-  $body.style.backgroundRepeat = 'no-repeat'
-  $body.style.backgroundPosition = 'center'
-})
 
 if (ISMOVIL) {
 }
@@ -263,8 +274,8 @@ function solidifyPiece() {
 }
 
 function gameOver() {
-  SOUND.bgMusic.pause()
-  SOUND.gameOverSound.play()
+  stopGameAudio()
+  startGameOverAudio()
   alert('Game Over')
   board.forEach(row => row.fill(0))
   score = 0
@@ -305,27 +316,10 @@ function removeLines() {
 
   if (rowsToRemove.length > 0) {
     score += rowsToRemove.length * 10;
-    startAudioBomb()
+    startRemoveOneLineSound()
   }else{
-    startAudioClick()
+    startCollisionSound()
   }
 }
 
-function startAudio() {
-  SOUND.bgMusic.loop = true
-  SOUND.bgMusic.volume = 0.1
-  SOUND.bgMusic.currentTime = 0
-  SOUND.bgMusic.play()
-}
 
-function startAudioBomb() {
-  SOUND.removeOneLineSound.currentTime = 1
-  SOUND.removeOneLineSound.volume = 1
-  SOUND.removeOneLineSound.play()
-}
-
-function startAudioClick(){
-  SOUND.collisionSound.currentTime = 0.2
-  SOUND.collisionSound.volume = 1
-  SOUND.collisionSound.play()
-}
