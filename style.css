@@ -118,6 +118,7 @@ place-items: center;
 .flex-between{
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
 }
 
 .game_name{
@@ -126,6 +127,15 @@ place-items: center;
   color: #fff;
   text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff00de, 0 0 70px #ff00de, 0 0 80px #ff00de, 0 0 100px #ff00de, 0 0 150px #ff00de;
   margin: 2.5rem 0;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+.bg-opacity{
+  background-color: rgba(0,0,0,0.5);
+  padding: 1rem;
+  border-radius: 1rem;
 }
 
 /* MAIN MENU */
@@ -245,6 +255,80 @@ display: grid;
   border: none;
 }
 
+/* CONFIG SCREEN */
+
+
+
+#config_screen{
+  height: 100vh;
+}
+
+#config_screen .buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#config_screen .btn {
+  width: 250px;
+  height: 50px;
+  margin: 10px;
+  border-radius: 10px;
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+#config_screen ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#config_screen ul li{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+
+}
+
+#config_screen ul li div{
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+#config_screen ul li div:nth-child(2){
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#config_screen ul li div:nth-child(2) button{
+  width: 6.6rem;
+  height: 2rem;
+  border-radius: 1rem;
+  border: none;
+  background-color: #000;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#config_screen ul li div:nth-child(2) button.active{
+  background-color: #fff;
+  color: #000;
+}
+
+#config_screen ul li div:nth-child(2) button:focus{
+  outline: none;
+}
+
+
 
 
 /* Estilos para dispositivos móviles (ancho de pantalla <= 768px) */
@@ -282,6 +366,8 @@ display: grid;
    background-color: rgba(0, 0, 0, 0.5);
    padding: 1rem;
   }
+
+  
 
 
 }

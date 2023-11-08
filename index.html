@@ -11,7 +11,7 @@
       <!-- PANTALLA PRINCIPAL -->
       <section id="main_screen" class="center" style="display: grid;">
         <h1 class="shining game_name">TETRIS</h1>
-        <h2 class="">Selecciona Tu Tema Favorito</h2>
+        <h2 class="">Selecciona Tu Favorito</h2>
         <article class="buttons">
           <button class="btn btn-theme" data-theme="db">
             <img src="./img/logo_db.png" alt="logo Dragon Ball" class="img-theme" />
@@ -27,6 +27,7 @@
         <h1 class="shining game_name">TETRIS</h1>
         <article class="buttons">
           <button id="btn_start" class="btn">JUGAR</button>
+          <button id="btn_config" class="btn">CONFIGURACIÓN</button>
           <button id="btn_scores" class="btn">PUNTAJES</button>
         </article>
       </section>
@@ -35,10 +36,11 @@
       <section id="game_screen" class="center" style="display: none;">
         <article class="menu">
           <div class="info">
+            <strong> Dificultad: <span id="difficulty">Moderada</span></strong>
             <strong> Puntaje: <span id="score"></span> </strong>
             <strong> Tiempo: <span id="time"></span> </strong>
-            <strong> Posición: <span id="lines"></span> </strong>
-            <strong> Nivel: <span id="lines"></span>  </strong>
+            <!-- <strong> Nivel: <span id="lines"></span>  </strong>
+            <strong> Posición: <span id="lines"></span> </strong> -->
           </div>
         </article>
         <article class="game-screen">
@@ -53,10 +55,34 @@
           <button id="down" class="btn btn-down"></button>
         </article>
       </section>
+
+      <!-- PANTALLA DE CONFIGURACIONES -->
+      <section id="config_screen" class="center" style="display: none;">
+        <h1 class="shining game_name">TETRIS</h1>
+        <article class="bg-opacity">
+          <ul>
+            <li>
+              <div class="mb-4">DIFICULTAD</div>
+              <div class="">
+                <button id="btn_easy" class="btn-config">FÁCIL</button>
+                <button id="btn_medium" class="btn-config active">MODERADA</button>
+                <button id="btn_hard" class="btn-config ">DIFÍCIL</button>
+              </div>
+            </li>
+
+          </ul>
+        </article>
+        <article class="buttons"> 
+          <button id="btn_main_screen" class="btn">Menu Principal</button>
+        </article>
+
+      </section>
     </div>
     <script type="module" src="/main.js"></script>
   </body>
 </html>
 
 <style>
+
+
 </style>

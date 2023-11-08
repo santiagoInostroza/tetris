@@ -1,6 +1,6 @@
 import './style.css'
 import {BLOCK_SIZE, BOARD_WIDTH, BOARD_HEIGHT, EVENT_MOVEMENTS, ISMOVIL, ISDESKTOP} from './consts'
-import { PIECES } from './pieces'
+import { PIECES, DIFFICULTY } from './pieces'
 import { selectTheme, startIntroAudio, stopIntroAudio, startGameAudio, stopGameAudio, startGameOverAudio , startRemoveOneLineSound, startCollisionSound} from './sounds'
 import { getBgImg } from './images'
 
@@ -9,20 +9,28 @@ import { getBgImg } from './images'
 const canvas = document.getElementById('canvas')
 const context = canvas.getContext('2d')
 
+const $body = document.querySelector('body')
+
 const $score = document.getElementById('score')
 const $time = document.getElementById('time')
 const $buttons_movil = document.getElementById('buttons_movil')
-const $game_screen = document.getElementById('game_screen')
+const $difficulty = document.getElementById('difficulty')
 
-const $body = document.querySelector('body')
+const $game_screen = document.getElementById('game_screen')
 const $main_screen = document.getElementById('main_screen')
 const $menu_screen = document.getElementById('menu_screen')
+const $config_screen = document.getElementById('config_screen')
 
 const $btn_start = document.getElementById('btn_start')
-
-
-
 const $btns_theme = document.querySelectorAll('.btn-theme')
+const $btn_config = document.getElementById('btn_config')
+const $btn_main_screen = document.getElementById('btn_main_screen')
+const $btn_easy = document.getElementById('btn_easy')
+const $btn_medium = document.getElementById('btn_medium')
+const $btn_hard = document.getElementById('btn_hard')
+
+let difficulty = DIFFICULTY.MEDIUM
+let pieces = PIECES[difficulty]
 
 // LISTENERS DE LOS BOTONES DE TEMA
 $btns_theme.forEach(btn => {
@@ -54,6 +62,55 @@ $btn_start.addEventListener('click', () => {
   stopIntroAudio()
   startGameAudio()
 })
+
+// LISTENER DEL BOTON config
+$btn_config.addEventListener('click', () => {
+  $menu_screen.style.display = 'none'
+  $config_screen.style.display = 'grid'
+})
+
+// LISTENER DEL BOTON MAIN SCREEN
+$btn_main_screen.addEventListener('click', () => {
+  $config_screen.style.display = 'none'
+  $menu_screen.style.display = 'grid'
+})
+
+// LISTENER DEL BOTON EASY
+$btn_easy.addEventListener('click', () => {
+  difficulty = DIFFICULTY.EASY
+  console.log(difficulty)
+  pieces = PIECES[difficulty]
+  $difficulty.innerText = 'Fácil'
+  console.log($difficulty)
+  
+  $btn_easy.classList.add('active')
+  $btn_medium.classList.remove('active')
+  $btn_hard.classList.remove('active')
+})
+
+// LISTENER DEL BOTON MEDIUM
+$btn_medium.addEventListener('click', () => {
+  difficulty = DIFFICULTY.MEDIUM
+  pieces = PIECES[difficulty]
+  $difficulty.innerText = 'Moderada'
+
+  $btn_easy.classList.remove('active')
+  $btn_medium.classList.add('active')
+  $btn_hard.classList.remove('active')
+})
+
+// LISTENER DEL BOTON HARD
+$btn_hard.addEventListener('click', () => {
+  difficulty = DIFFICULTY.HARD
+  pieces = PIECES[difficulty]
+  $difficulty.innerText = 'Difícil'
+
+  $btn_easy.classList.remove('active')
+  $btn_medium.classList.remove('active')
+  $btn_hard.classList.add('active')
+})
+
+
 
 
 if (ISMOVIL) {
@@ -141,7 +198,7 @@ function createBoard(width, height) {
 // 4 create piece
 const piece = {
   position: { x: 5, y: 5 },
-  matrix: PIECES[Math.floor(Math.random() * PIECES.length)]
+  matrix: pieces[Math.floor(Math.random() * pieces.length)]
 }
 
 
@@ -262,7 +319,7 @@ function solidifyPiece() {
     })
   })
   // get random piece
-  piece.matrix = PIECES[Math.floor(Math.random() * PIECES.length)]
+  piece.matrix = pieces[Math.floor(Math.random() * pieces.length)]
   // reset piece
   piece.position.y = 0
   piece.position.x = Math.floor((BOARD_WIDTH - piece.matrix[0].length) / 2)
